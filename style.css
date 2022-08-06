@@ -1,0 +1,78 @@
+body {
+	background-image: linear-gradient(to left, #add8e6, #b3d5e0, #fafdfe);
+	font-family: verdana, genenva, arial, sans-serif;
+}
+
+input {
+	padding: 3px;
+	margin: 4px;
+	border: 2px solid black;
+	border-radius: 6%;
+	box-shadow: 2px 2px #2f4f4f;
+	cursor: pointer;
+}
+
+input:focus{
+	border-color: blue;
+	outline-style: groove;
+	outline-color: blue;
+}
+
+
+label {
+	font-size: 1.3rem;
+	font-weight: bold;
+	margin-bottom: 1.5rem;
+}
+
+#textbox {
+	margin: 2px;
+	border: 3px solid black;
+	box-shadow: 2px 2px #2f4f4f;
+}
+
+#gera-relatorio {
+		width: 260px;
+		height: 50px; 
+		margin-bottom: 4px;
+		margin-top: 5px;
+		border: 3px solid black;
+		border-radius: 4%;
+		font-size: 21px;
+		font-weight: bold;
+		text-shadow: 1px 1px 1px 1px #fafdfe;
+		background-color: #fafdfe;
+		box-shadow: 2px 2px #2f4f4f;
+		cursor: pointer; 
+}
+
+#gera-relatorio:hover{
+  width: 265px;
+  height: 60px;
+  font-size: 1.5em;
+  box-shadow: 0;
+  outline-style: groove;
+  outline-color: blue;
+}
+
+#reset {
+	width: 250px;
+	height: 30px;
+	text-align: center;
+  margin-bottom: 15px;
+}
+
+#reset:hover {
+  width: 253px;
+  height: 33px;
+  font-size: 1.1em;
+  outline-style: groove;
+  outline-color: blue;
+}
+
+#divRelatorio {
+	display: flex;
+	max-width: 50%;
+	justify-content: space-between;
+
+}
