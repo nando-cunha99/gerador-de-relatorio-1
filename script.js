@@ -18,7 +18,7 @@ const btnGerador = document.querySelector('#gera-relatorio');
 
 const btnReset = document.querySelector('#reset');
 
-//const relatorio = document.querySelector('#relatorio');
+const relatorio = document.querySelector('#relatorio');
 
 const divBtnCopy = document.querySelector('#divBtnCopy');
 
@@ -79,12 +79,21 @@ function habilitaLimpaPagina() {
     btnReset.disabled = false;
 }
 
+//Cria array com elementos filhos de um outro elemento
+function criaArray(arrayDoPai) {
+    let arrayPai = Array.from(arrayDoPai.children);
+  return arrayPai
+}
+
 //Cria um botão para copiar o texto.
-function criarBotaoCopiar(divBotao, itemCopiado) {
+function criarBotaoCopiar(divBotao) {
     let btnCopy = document.createElement('button');
     divBotao.appendChild(btnCopy);
-    btnCopy.addEventListener('click', () => {
-        navigator.clipboard.writeText(itemCopiado.innerText);
+    criaArray(divBtnCopy).forEach((valor, index) => {
+      valor.addEventListener('click', () =>{
+      let posicao = index;
+      navigator.clipboard.writeText(criaArray(relatorio)[index].innerText);
+      })
     })
 }
 
@@ -106,9 +115,11 @@ function geraRelatorio () {
         break;
     }
   
-
+    let divFilhaDoRelatorio = document.createElement('div')
+  
     inputTodosArray.forEach((valorAtual, indice) => {
 
+        
         let spanDoRelatorio = document.createElement('span');
 
         switch(indice){
@@ -125,11 +136,12 @@ function geraRelatorio () {
             spanDoRelatorio.innerHTML = `${valorAtual.value}<br><br>`
             break;
           }
-
-          relatorio.appendChild(spanDoRelatorio)
+      
+          divFilhaDoRelatorio.appendChild(spanDoRelatorio);
+                              
     })
-
-    criarBotaoCopiar(divBtnCopy, relatorio);
+     relatorio.appendChild(divFilhaDoRelatorio);  
+     criarBotaoCopiar(divBtnCopy);
 
 }
 
@@ -137,6 +149,7 @@ function geraRelatorio () {
 function limpaPagina (){
     btnReset.disabled = true;
     verificaLista(relatorio);
+    verificaLista(divBtnCopy)
 }
 
 btnGerador.addEventListener('click', geraRelatorio);
@@ -144,4 +157,3 @@ btnGerador.addEventListener('click', geraRelatorio);
 btnGerador.addEventListener('click', habilitaLimpaPagina);
 
 btnReset.addEventListener('click', limpaPagina);
-
