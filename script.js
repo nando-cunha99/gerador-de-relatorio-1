@@ -85,10 +85,39 @@ function criaArray(arrayDoPai) {
   return arrayPai
 }
 
+//Criar svg para ir para o botão
+function criarSvg(elementoPai) {
+  let svgCopiar = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svgCopiar.setAttribute("version", "1.1");
+  svgCopiar.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+  svgCopiar.setAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink");
+  svgCopiar.setAttribute("x", "0px");
+  svgCopiar.setAttribute("y", "0px");
+  svgCopiar.setAttribute("viewBox", "0 0 512 512");
+  svgCopiar.setAttribute("style", "enable-background:new 0 0 512 512;");
+  svgCopiar.setAttribute("xml:space", "preserve");
+  let elementoG = document.createElement('g');
+  let elementoGAbaixo = document.createElement('g');
+  elementoG.appendChild(elementoGAbaixo);
+  svgCopiar.appendChild(elementoG);
+  
+  let pathSvgCopiar = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  pathSvgCopiar.setAttribute("d", "M130.152,90.648H51.565V512h232.008l82.083-82.083h94.78V0H130.152V90.648z M293.354,454.998v-25.08h25.08 			L293.354,454.998z M342.045,396.526h-82.082v82.083H84.956V124.04h257.09V396.526z M163.543,33.391h263.502v363.135h-51.609			V90.648H163.543V33.391z") 
+      
+  elementoGAbaixo.appendChild(pathSvgCopiar);
+  
+  for(let contador = 0; contador < 15; contador++){
+      let outroElementoG = document.createElement('g');
+      svgCopiar.appendChild(outroElementoG);
+    }
+  elementoPai.appendChild(svgCopiar);
+}
+
 //Cria um botão para copiar o texto.
 function criarBotaoCopiar(divBotao) {
     let btnCopy = document.createElement('button');
     divBotao.appendChild(btnCopy);
+    criarSvg(btnCopy);
     criaArray(divBtnCopy).forEach((valor, index) => {
       valor.addEventListener('click', () =>{
       let posicao = index;
@@ -157,3 +186,4 @@ btnGerador.addEventListener('click', geraRelatorio);
 btnGerador.addEventListener('click', habilitaLimpaPagina);
 
 btnReset.addEventListener('click', limpaPagina);
+
