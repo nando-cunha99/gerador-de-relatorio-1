@@ -112,28 +112,9 @@ function criarBotaoCopiar(divBotao) {
     })
 }
 
-//Adiciona o relatorio
-function geraRelatorio () {
-    let inputUnidadeChecada = document.querySelector('input[name="unidade"]:checked');
-
-    let inputRelatoChecado = document.querySelector('input[name="relato"]:checked');
-    
-    let inputTodosArray = new Array(inputUnidadeChecada, inputHora, inputZona, inputRelatoChecado);
- 
-    while(inputRelatoChecado.value === inputRelato.item(1).value) {
-      inputRelatoChecado.value = textbox.value;
-      break;
-    }
-  
-    while(inputRelatoChecado.value === 'sem-anormalidades') {
-        inputRelatoChecado.value = `Feito contato com funcionário <b>${inputFuncionario.value}</b> , que informa estar sem anormalidades.`;
-        break;
-    }
-  
-    let divFilhaDoRelatorio = document.createElement('div')
-  
-    inputTodosArray.forEach((valorAtual, indice) => {
-
+//Monta o relatório
+function montaRelatorio(arrayDosInput, divEscolhida) {
+      arrayDosInput.forEach((valorAtual, indice) => {
         
         let spanDoRelatorio = document.createElement('span');
 
@@ -151,13 +132,47 @@ function geraRelatorio () {
             spanDoRelatorio.innerHTML = `${valorAtual.value}<br><br>`
             break;
           }
-      
-          divFilhaDoRelatorio.appendChild(spanDoRelatorio);
-                              
-    })
-     relatorio.appendChild(divFilhaDoRelatorio);  
-     criarBotaoCopiar(divBtnCopy);
+          divEscolhida.appendChild(spanDoRelatorio);                    
+      })     
+}
 
+//Valida dados do formulário
+function validaDados(arrayParaValidar, divAbaixoDoRelatorio, inputDeRelato, inputDaUnidade, inputDoFuncionario) {
+    if (!inputDaUnidade || inputHora.value === ''|| inputZona.value === ''|| inputDoFuncionario === '' || !inputDeRelato) {
+      alert(`FAVOR VERIFICAR OS DADOS INVÁLIDOS`);    
+    } 
+    else{
+      
+      while(inputDeRelato.value === inputRelato.item(1).value) {
+        inputDeRelato.value = textbox.value;
+        break;
+      }
+  
+      while(inputDeRelato.value === inputRelato.item(0).value) {
+        inputDeRelato.value = `Feito contato com funcionário <b>${inputFuncionario.value}</b> , que informa estar sem anormalidades.`;
+        break;
+      } 
+  
+     montaRelatorio(arrayParaValidar, divAbaixoDoRelatorio);
+     relatorio.appendChild(divAbaixoDoRelatorio);  
+     criarBotaoCopiar(divBtnCopy);
+    }
+  }
+
+//Adiciona o relatorio
+function geraRelatorio () {
+    let funcionarioNoLocal = inputFuncionario.value;
+  
+    let inputUnidadeChecada = document.querySelector('input[name="unidade"]:checked');
+
+    let inputRelatoChecado = document.querySelector('input[name="relato"]:checked');
+    
+    let inputTodosArray = new Array(inputUnidadeChecada, inputHora, inputZona, inputRelatoChecado);
+  
+    const divFilhaDoRelatorio = document.createElement('div'); 
+ 
+    validaDados(inputTodosArray, divFilhaDoRelatorio, inputRelatoChecado, inputUnidadeChecada, funcionarioNoLocal);
+  
 }
 
 //Reseta toda a página
