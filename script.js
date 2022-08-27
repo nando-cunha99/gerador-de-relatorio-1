@@ -137,27 +137,45 @@ function montaRelatorio(arrayDosInput, divEscolhida) {
 }
 
 //Valida dados do formulário
-function validaDados(arrayParaValidar, divAbaixoDoRelatorio, inputDeRelato, inputDaUnidade, inputDoFuncionario) {
-    if (!inputDaUnidade || inputHora.value === ''|| inputZona.value === ''|| inputDoFuncionario === '' || !inputDeRelato) {
-      alert(`FAVOR VERIFICAR OS DADOS INVÁLIDOS`);    
-    } 
-    else{
-      
+function defineValorRelatorio(inputDeRelato, arrayUtilizado, divQueVaiORelato) {
+     
       while(inputDeRelato.value === inputRelato.item(1).value) {
-        inputDeRelato.value = textbox.value;
+          inputDeRelato.value = textbox.value;
         break;
       }
   
       while(inputDeRelato.value === inputRelato.item(0).value) {
         inputDeRelato.value = `Feito contato com funcionário <b>${inputFuncionario.value}</b> , que informa estar sem anormalidades.`;
         break;
-      } 
+      }
   
-     montaRelatorio(arrayParaValidar, divAbaixoDoRelatorio);
-     relatorio.appendChild(divAbaixoDoRelatorio);  
-     criarBotaoCopiar(divBtnCopy);
+    montaRelatorio(arrayUtilizado, divQueVaiORelato);
+    relatorio.appendChild(divQueVaiORelato);  
+    criarBotaoCopiar(divBtnCopy);
+
+    }
+
+//
+function verificaArray (arrayVerificado, relato, divAbaixoDoRelatorio) {
+ 
+  let inputsValidos = true;
+  
+  for (let contador = 0; contador < arrayVerificado.length; contador++){
+    if(!arrayVerificado[contador] || arrayVerificado[contador].value ===''){
+      inputsValidos = false;
     }
   }
+  
+  if(!inputsValidos){
+      alert('FAVOR INSERIR DADOS VALIDOS')
+        
+  }else{
+    do {
+       defineValorRelatorio(relato, arrayVerificado, divAbaixoDoRelatorio);
+      break;
+    } while(inputsValidos)
+  }
+}
 
 //Adiciona o relatorio
 function geraRelatorio () {
@@ -171,12 +189,11 @@ function geraRelatorio () {
   
     const divFilhaDoRelatorio = document.createElement('div'); 
  
-    validaDados(inputTodosArray, divFilhaDoRelatorio, inputRelatoChecado, inputUnidadeChecada, funcionarioNoLocal);
-  
+    verificaArray(inputTodosArray, inputRelatoChecado, divFilhaDoRelatorio);        
 }
 
 //Reseta toda a página
-function limpaPagina (){
+function limpaPagina () {
     btnReset.disabled = true;
     verificaLista(relatorio);
     verificaLista(divBtnCopy)
