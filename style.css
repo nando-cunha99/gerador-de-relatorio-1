@@ -3,6 +3,18 @@ body {
 	font-family: verdana, genenva, arial, sans-serif;
 }
 
+#divTitulo{
+    padding-bottom: 0.8em;
+}
+
+#divTitulo #titulo{
+  margin-bottom: 0.3em;
+}
+
+#divTitulo #informativo{
+  font-size: 0.7em;
+}
+
 input {
 	padding: 3px;
 	margin: 4px;
