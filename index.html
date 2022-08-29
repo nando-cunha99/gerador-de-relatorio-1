@@ -16,17 +16,20 @@
 		<form id='form'>
 			<label for='unidade'>Unidade</label>
 			<input onclick="adicionaListas()" type='radio' class='unidade' name='unidade' value='Unidade 1'>Unidade 1
-			<input onclick="adicionaListas()" type='radio' class='unidade' name='unidade' value='Unidade 2'>Unidade 2	
+			<input onclick="adicionaListas()" type='radio' class='unidade' name='unidade' value='Unidade 2'>Unidade 2
+			*	
 			<br>
 
 			<label for='hora'>Hora: </label>
 			<input type='time' id='hora' name='hora'>
+			*
 			<br>
 
 			<label for='zona'>Zona: </label>
 			<input type='search' list='listaZona' id='zona' name='zona'>
 			<datalist id='listaZona'>
 			</datalist>
+			*
 			<br>
 
 			<label for='funcionario'>Funcionario: </label>
@@ -38,8 +41,9 @@
 			<label for='relato'>Relato: </label>
 			<input onclick="habilitaTextbox()" type='radio' class='relato' name='relato' value='sem-anormalidades'>Sem anormalidades
 			<input onclick="habilitaTextbox()" type='radio' class='relato' name='relato' value='outro'>Outro:
+			*
 			<br>
-			<textarea id='textbox' cols='30' rows='5' placeholder='Ex: Feito contato com o funcionário fulano no local que informa se tratar de um felino no muro'></textarea>
+			<textarea id='textbox' cols='45' rows='8' placeholder='Ex: Feito contato com o funcionário fulano no local que informa se tratar de um felino no muro'></textarea>
 			<br>
 
 			<button type='button' id='gera-relatorio'>Gerar Relatorio</button>
